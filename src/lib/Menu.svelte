@@ -2,15 +2,26 @@
     import SplitApp from './apps/SplitApp.svelte'
 
     enum App {
-        Menu,
-        Split,
+        Menu = '#',
+        Split = '#split',
     }
 
     function openApp(openApp: App) {
+        window.location.hash = openApp;
         app = openApp;
     }
 
     let app = App.Menu;
+
+    // Select initial app on page load.
+    switch (window.location.hash) {
+        case App.Split:
+            app = App.Split;
+            break;
+        default:
+            app = App.Menu;
+            break;
+    }
 </script>
 
 <style>
